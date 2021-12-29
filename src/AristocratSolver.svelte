@@ -51,7 +51,7 @@
   }
 </script>
 
-<p>Solve the following aristocrat by {author}</p>
+<p>Solve the following aristocrat by {author ?? 'unknown'}</p>
 <div class="aristocrat">
   {#each splits as split, i}
     {#if split.type == SPLIT.WORD}

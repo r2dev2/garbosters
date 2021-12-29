@@ -16,6 +16,10 @@
   onMount(newProblem);
 </script>
 
+<svelte:head>
+  <title>Garbosters</title>
+</svelte:head>
+
 <main>
   {#if solved}
     <p class="solved-msg">Congratulations you solved the problem!</p>
@@ -23,6 +27,9 @@
   {#if problem}
     <AristocratSolver {...problem} bind:allWordsSolved={solved} />
   {/if}
+  <button class="new-problem" on:click={newProblem}>
+    New Problem
+  </button>
 </main>
 
 <style>
