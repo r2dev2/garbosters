@@ -6,6 +6,7 @@
   import AristocratSolver from './AristocratSolver.svelte';
 
   let problem = null;
+  let solved = false;
   let difficulty = Difficulty.MEDIUM;
 
   const newProblem = () => {
@@ -16,10 +17,16 @@
 </script>
 
 <main>
+  {#if solved}
+    <p class="solved-msg">Congratulations you solved the problem!</p>
+  {/if}
   {#if problem}
-    <AristocratSolver {...problem} />
+    <AristocratSolver {...problem} bind:allWordsSolved={solved} />
   {/if}
 </main>
 
 <style>
+  .solved-msg {
+    color: green;
+  }
 </style>

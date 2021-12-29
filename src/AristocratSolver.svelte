@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte';
+  import { createEventDispatcher, onMount } from 'svelte';
   import { splitText, SPLIT } from './crypto.js';
   import Word from './Word.svelte';
   import { allWordsPotentiallySolved, cursor } from './store.js';
@@ -7,13 +7,14 @@
   export let plaintext = '';
   export let ciphertext = '';
   export let author = '';
-
-  let allWordsSolved = false;
+  export let allWordsSolved = false;
 
   onMount(() => {
     allWordsPotentiallySolved.set(false);
     cursor.set(-1);
   });
+
+  const dispatch = createEventDispatcher();
 
   const isValidCursorPosition = pos => splits.some(
     s => s.type == SPLIT.WORD && s.index <= pos && pos < s.index + s.content.length
@@ -41,12 +42,16 @@
     setTimeout(() => {
       if ($allWordsPotentiallySolved) {
         allWordsSolved = true;
-        console.log('solved everything');
+        dispatch('solved');
       }
     }, 10);
   }
+  $: if (!$allWordsPotentiallySolved) {
+    allWordsSolved = false;
+  }
 </script>
 
+<p>Solve the following aristocrat by {author}</p>
 <div class="aristocrat">
   {#each splits as split, i}
     {#if split.type == SPLIT.WORD}
@@ -58,6 +63,19 @@
         on:cursor-backward={moveCursorBackward}
       />
     {:else}
+      <div class="non-word">{split.content}</div>
     {/if}
   {/each}
 </div>
+
+<style>
+  .aristocrat {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .non-word {
+    margin-right: 2rem;
+  }
+</style>

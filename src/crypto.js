@@ -1,7 +1,6 @@
 import { QUOTES } from './stats.js';
 
-// const choose = arr => arr[Math.floor(Math.random() * arr.length)];
-const choose = arr => arr[0];
+const choose = arr => arr[Math.floor(Math.random() * arr.length)];
 
 const shuffleArray = arr => arr
     .map(a => [Math.random(), a])
