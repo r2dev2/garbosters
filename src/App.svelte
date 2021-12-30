@@ -7,7 +7,7 @@
 
   let problem = null;
   let solved = false;
-  let difficulty = Difficulty.MEDIUM;
+  let difficulty = Difficulty.HARD;
 
   const newProblem = () => {
     problem = newAristocrat(difficulty);
