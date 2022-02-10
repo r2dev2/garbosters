@@ -1,6 +1,7 @@
 {
   "name": "svelte-app",
   "version": "1.0.0",
+  "license": "WTFPL",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^8.0.0",
