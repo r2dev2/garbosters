@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher, onMount } from 'svelte';
   import { splitText, SPLIT } from './crypto.js';
+  import FrequencyCounter from './FrequencyCounter.svelte';
   import Word from './Word.svelte';
   import { allWordsPotentiallySolved, cursor } from './store.js';
 
@@ -51,7 +52,11 @@
   }
 </script>
 
-<p>Solve the following aristocrat by {author ?? 'unknown'}</p>
+<p>Solve the following aristocrat by {author ?? 'unknown'}.</p>
+
+<p>Frequencies:</p>
+<FrequencyCounter quote={ciphertext} />
+
 <div class="aristocrat">
   {#each splits as split, i}
     {#if split.type == SPLIT.WORD}
